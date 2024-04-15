@@ -6,21 +6,29 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-@Table(name ="employees")
+@Table(name ="employee")
 @Entity
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long departmentId;
+
     private String name;
+
     private String gender;
+
     private Date dateOfBirth;
+
     private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 }

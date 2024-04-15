@@ -8,6 +8,7 @@ import com.example.projectmanagement.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         employee.setName(createEmployee.getName());
         employee.setGender(createEmployee.getGender());
-        employee.setDepartmentId(createEmployee.getDepartmentId());
+        //employee.setDepartmentId(createEmployee.getDepartmentId());
         employee.setDateOfBirth(createEmployee.getDateOfBirth());
         employee.setRole(Role.USER);
         return employeeRepository.save(employee);
@@ -45,4 +46,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findEmployeesByName(String name) {
         return employeeRepository.findByName(name);
     }
+
+    @Override
+    public boolean isValidGender(String gender) {
+        return gender != null && (gender.equals("Male") || gender.equals("Female"));
+    }
+
+    @Override
+    public boolean isValidDateOfBirth(Date dateOfBirth) {
+        Date currentDate = new Date(System.currentTimeMillis());
+        Date minDateOfBirth = Date.valueOf("1990-01-01");
+        return dateOfBirth != null && dateOfBirth.before(currentDate) && dateOfBirth.after(minDateOfBirth);
+    }
+
 }

@@ -3,7 +3,9 @@ package com.example.projectmanagement.service.impl;
 import com.example.projectmanagement.dto.Department;
 import com.example.projectmanagement.repository.DepartmentRepository;
 import com.example.projectmanagement.service.DepartmentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +16,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     DepartmentRepository departmentRepository;
-    @Override
+
+    @Transactional
     public List<Department> getAllDepartments() {
         return departmentRepository.findAll();
     }
 
-    @Override
     public Optional<Department> getDepartmentById(Long id) {
         return departmentRepository.findById(id);
     }
