@@ -1,6 +1,7 @@
 package com.example.projectmanagement.controller;
 
-import com.example.projectmanagement.dto.Project;
+import com.example.projectmanagement.dto.CreateProject;
+import com.example.projectmanagement.entity.Project;
 import com.example.projectmanagement.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,14 @@ public class ProjectController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createProject(@RequestBody Project project) {
+    public ResponseEntity<?> createProject(@RequestBody CreateProject createProject) {
 
-        return ResponseEntity.ok(projectService.saveOrUpdateProject(project));
+        return ResponseEntity.ok(projectService.saveOrUpdateProject(createProject));
     }
 
     @PutMapping()
-    public ResponseEntity<?> updateProject(@RequestBody Project project) {
-        return ResponseEntity.ok(projectService.saveOrUpdateProject(project));
+    public ResponseEntity<?> updateProject(@RequestBody CreateProject createProject) {
+        return ResponseEntity.ok(projectService.saveOrUpdateProject(createProject));
     }
 
     @DeleteMapping("/{id}")

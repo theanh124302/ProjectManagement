@@ -1,4 +1,4 @@
-package com.example.projectmanagement.dao;
+package com.example.projectmanagement.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

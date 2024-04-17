@@ -1,4 +1,4 @@
-package com.example.projectmanagement.dao;
+package com.example.projectmanagement.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInRequest {
-    private String username;
-    private String password;
+public class AuthenticationResponse {
+    private String token;
+    private String refreshToken;
 }
-

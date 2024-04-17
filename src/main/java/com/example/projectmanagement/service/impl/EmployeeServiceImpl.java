@@ -1,11 +1,15 @@
 package com.example.projectmanagement.service.impl;
 
-import com.example.projectmanagement.dao.CreateEmployee;
-import com.example.projectmanagement.dao.Role;
-import com.example.projectmanagement.dto.Employee;
+import com.example.projectmanagement.dto.CreateEmployee;
+import com.example.projectmanagement.dto.Role;
+import com.example.projectmanagement.entity.Employee;
+import com.example.projectmanagement.repository.DepartmentRepository;
 import com.example.projectmanagement.repository.EmployeeRepository;
 import com.example.projectmanagement.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -16,6 +20,9 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -31,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         employee.setName(createEmployee.getName());
         employee.setGender(createEmployee.getGender());
-        //employee.setDepartmentId(createEmployee.getDepartmentId());
+        employee.setDepartment(departmentRepository.getReferenceById(createEmployee.getDepartment_id()));
         employee.setDateOfBirth(createEmployee.getDateOfBirth());
         employee.setRole(Role.USER);
         return employeeRepository.save(employee);
@@ -43,8 +50,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findEmployeesByName(String name) {
-        return employeeRepository.findByName(name);
+    public Page<Employee> findEmployeesByName(String name, Pageable pageable) {
+        System.out.println(name);
+        return employeeRepository.searchByName(name,pageable);
     }
 
     @Override

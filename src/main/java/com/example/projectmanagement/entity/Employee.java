@@ -1,12 +1,13 @@
-package com.example.projectmanagement.dto;
+package com.example.projectmanagement.entity;
 
 
-import com.example.projectmanagement.dao.Role;
+import com.example.projectmanagement.dto.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -26,9 +27,12 @@ public class Employee {
 
     private Date dateOfBirth;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department;
+
 }

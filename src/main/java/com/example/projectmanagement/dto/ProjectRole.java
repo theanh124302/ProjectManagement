@@ -1,4 +1,4 @@
-package com.example.projectmanagement.dao;
+package com.example.projectmanagement.dto;
 
 public enum ProjectRole {
     BE,

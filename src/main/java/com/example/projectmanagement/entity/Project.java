@@ -1,5 +1,6 @@
-package com.example.projectmanagement.dto;
+package com.example.projectmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,10 +25,11 @@ public class Project {
 
     private Long leaderId;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    Set<Employee> employees;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Set<Employee> employees;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department;
 }

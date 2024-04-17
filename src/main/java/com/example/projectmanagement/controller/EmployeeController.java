@@ -1,14 +1,15 @@
 package com.example.projectmanagement.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import com.example.projectmanagement.dao.CreateEmployee;
-import com.example.projectmanagement.dto.Employee;
+import com.example.projectmanagement.dto.CreateEmployee;
+import com.example.projectmanagement.entity.Employee;
 import com.example.projectmanagement.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,9 +51,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Employee>> getEmployeeByName(@RequestParam String name) {
-        return ResponseEntity.ok(employeeService.findEmployeesByName(name));
+    public ResponseEntity<Page<Employee>> getEmployeeByName(@RequestParam String name, Pageable pageable) {
+        return ResponseEntity.ok(employeeService.findEmployeesByName(name, pageable));
     }
-
 
 }

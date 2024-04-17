@@ -1,4 +1,4 @@
-package com.example.projectmanagement.dto;
+package com.example.projectmanagement.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,4 +27,5 @@ public class Department {
 
     @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private List<Project> projects;
+
 }
